@@ -1,6 +1,6 @@
 // src/App.js
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import Scrape from './components/Scrape';
@@ -13,11 +13,11 @@ const App = () => {
         <Router>
             <div>
                 <Navigation />
-                <Switch>
-                    <Route path="/login" render={(props) => <Login setAuth={setIsAuthenticated} />} />
-                    <Route path="/register" component={Register} />
-                    <Route path="/scrape" render={(props) => isAuthenticated ? <Scrape /> : <Login setAuth={setIsAuthenticated} />} />
-                </Switch>
+                <Routes>
+                    <Route path="/login" element={<Login setAuth={setIsAuthenticated} />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/scrape" element={isAuthenticated ? <Scrape /> : <Login setAuth={setIsAuthenticated} />} />
+                </Routes>
             </div>
         </Router>
     );

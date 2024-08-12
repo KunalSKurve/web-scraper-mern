@@ -1,5 +1,6 @@
 // src/components/Login.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../api';
 
 const Login = ({ setAuth }) => {
@@ -7,6 +8,7 @@ const Login = ({ setAuth }) => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate(); // Add this hook
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,6 +18,7 @@ const Login = ({ setAuth }) => {
             const response = await api.post('/auth/login', { email, password });
             localStorage.setItem('token', response.data.token);
             setAuth(true);
+            navigate('/scrape'); // Redirect to /scrape or another page on successful login
         } catch (error) {
             setError('Login failed. Please check your credentials.');
         } finally {
