@@ -1,6 +1,7 @@
 // src/components/Scrape.js
 import React, { useState } from 'react';
 import api from '../api';
+import './Scrape.css';  // Importing the custom CSS file
 
 const Scrape = () => {
     const [url, setUrl] = useState('');
@@ -26,20 +27,22 @@ const Scrape = () => {
     };
 
     return (
-        <div>
+        <div className="scrape-container">
             <h2>Scrape Data</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <input
-                type="text"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                placeholder="Enter URL"
-            />
-            <button onClick={handleScrape} disabled={loading}>
-                {loading ? 'Scraping...' : 'Scrape'}
-            </button>
+            {error && <p className="error-text">{error}</p>}
+            <div className="input-group">
+                <input
+                    type="text"
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)}
+                    placeholder="Enter URL"
+                />
+                <button onClick={handleScrape} className="btn" disabled={loading}>
+                    {loading ? 'Scraping...' : 'Scrape'}
+                </button>
+            </div>
             {data && (
-                <div>
+                <div className="scraped-data">
                     <h3>Scraped Data:</h3>
                     <pre>{JSON.stringify(data, null, 2)}</pre>
                 </div>
